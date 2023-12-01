@@ -32,8 +32,15 @@ int main() {
     for (const auto& l : lines) {
         firstDigit = firstDigitFinder(l);
         lastDigit = lastDigitFinder(l);
-
-        sum += std::stoi(firstDigit + lastDigit);
+        
+        if (firstDigit == "0" && lastDigit != "0") {
+            sum += std::stoi(lastDigit);
+        } else if (firstDigit != "0" && lastDigit == "0") {
+            sum += std::stoi(firstDigit); 
+        } else if (firstDigit == "0" && lastDigit == "0") {
+        } else {
+            sum += std::stoi(firstDigit + lastDigit);
+        }
     }
 
     std::cout << "Trebuchet coordinates --> " << sum << std::endl;
