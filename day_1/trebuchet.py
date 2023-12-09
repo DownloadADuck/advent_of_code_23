@@ -1,9 +1,21 @@
+def word_to_digit(word):
+
+    wordToDigitMap = {
+            'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4,
+            'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9
+    }
+    return wordToDigitMap.get(word.lower(), 0)
 
 def process_line(line):
 
+    wordToDigitMap = {
+            'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4,
+            'five': 5, 'six': 6, 'seven': 7, 'eight': 8, 'nine': 9
+    }
+
     # get the digits
-    firstDigit = int(next(char for char in line if char.isdigit()))
-    lastDigit = int(next(char for char in reversed(line) if char.isdigit()))
+    firstDigit = word_to_digit(next((word for word in line.split() if word.isdigit() or word.lower() in wordToDigitMap), '0'))
+    lastDigit = word_to_digit(next((word for word in reversed(line.split()) if word.isdigit() or word.lower() in wordToDigitMap), '0'))
 
     # concatenate
     concatenated = int(str(firstDigit) + str(lastDigit))
@@ -11,8 +23,8 @@ def process_line(line):
     return concatenated
 
 def main():
-#    inputFilePath = "test.txt"
-    inputFilePath = "input.txt"
+    inputFilePath = "2test.txt"
+#    inputFilePath = "input.txt"
     totalSum = 0
 
     try: 
